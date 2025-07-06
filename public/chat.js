@@ -15,7 +15,7 @@ let chatHistory = [
   {
     role: "assistant",
     content:
-      "Hello! I'm an LLM chat app powered by Cloudflare Workers AI. How can I help you today?",
+      "Hello! I'm an AutoRAG-powered assistant that can help you find information from your knowledge base. What would you like to know?",
   },
 ];
 let isProcessing = false;
@@ -81,7 +81,7 @@ async function sendMessage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        messages: chatHistory,
+        query: message,
       }),
     });
 
@@ -130,7 +130,7 @@ async function sendMessage() {
     console.error("Error:", error);
     addMessageToChat(
       "assistant",
-      "Sorry, there was an error processing your request.",
+      "Sorry, there was an error processing your request. Please try again.",
     );
   } finally {
     // Hide typing indicator
